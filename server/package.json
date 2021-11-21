@@ -1,6 +1,7 @@
 {
   "scripts": {
-    "dev": "ts-node-dev --respawn ./src/app.ts"
+    "dev": "ts-node-dev --respawn ./src/app.ts",
+    "test": "env TS_NODE_COMPILER_OPTIONS='{\"module\": \"commonjs\" }' mocha -r ts-node/register 'src/tests/**/*.ts' --timeout 10000 --exit"
   },
   "dependencies": {
     "@types/bcrypt": "^5.0.0",
@@ -26,9 +27,16 @@
     "validator": "^13.7.0"
   },
   "devDependencies": {
+    "@types/chai": "^4.2.22",
+    "@types/chai-http": "^4.2.0",
     "@types/express": "^4.17.13",
+    "@types/mocha": "^9.0.0",
     "@types/node": "^16.11.7",
     "@types/passport-jwt": "^3.0.6",
+    "chai": "^4.3.4",
+    "chai-http": "^4.3.0",
+    "mocha": "^9.1.3",
+    "ts-node": "^10.4.0",
     "ts-node-dev": "^1.1.8"
   }
 }

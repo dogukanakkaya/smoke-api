@@ -31,3 +31,5 @@ app.use('/auth', AuthController)
 app.use('/api', JwtMiddleware, BaseApiController)
 
 app.listen(PORT || 8000, () => console.log(`Listening: http://127.0.0.1:${PORT || 8000}`))
+
+export default app

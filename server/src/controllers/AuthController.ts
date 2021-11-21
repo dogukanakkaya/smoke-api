@@ -83,7 +83,7 @@ router.post('/register', async (req: Request, res: Response) => {
             }
         })
     } catch (err: any) {
-        res.json({
+        res.status(422).json({
             status: 0,
             message: err.message
         })
