@@ -47,12 +47,7 @@ router.post('/login', (req: Request, res: Response) => {
             iss: 'localhost'
         }, JWT_SECRET!, { expiresIn: '2h' })
 
-        res.cookie('access_token', token, {
-            httpOnly: true,
-            secure: true
-        })
-
-        return res.json({
+        return res.cookie('access_token', token, { httpOnly: true, secure: true }).json({
             status: 1,
             user
         })
@@ -74,7 +69,7 @@ router.post('/register', async (req: Request, res: Response) => {
     try {
         await user.save()
 
-        res.json({
+        return res.json({
             status: 1,
             user: {
                 firstName,
@@ -83,7 +78,7 @@ router.post('/register', async (req: Request, res: Response) => {
             }
         })
     } catch (err: any) {
-        res.status(422).json({
+        return res.status(422).json({
             status: 0,
             message: err.message
         })
@@ -91,11 +86,7 @@ router.post('/register', async (req: Request, res: Response) => {
 })
 
 router.post('/logout', async (req: Request, res: Response) => {
-    res.clearCookie('access_token')
-
-    res.json({
-        status: 1
-    })
+    return res.clearCookie('access_token').json({ status: 1 })
 })
 
 export default router
