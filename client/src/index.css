@@ -1,0 +1,17 @@
+@import "bootstrap-icons/font/bootstrap-icons.css";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.s-label {
+    @apply block mb-2 text-sm text-gray-600 
+}
+
+.s-input {
+    @apply w-full px-3 py-2  rounded-md focus:outline-none focus:ring placeholder-gray-300 border border-gray-300 focus:ring-indigo-100 focus:border-indigo-300
+}
+
+.s-btn {
+    @apply w-full px-3 py-4 rounded-md focus:outline-none
+}

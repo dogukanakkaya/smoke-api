@@ -1,0 +1,7 @@
+const { PORT, JWT_SECRET, MONGO_CONNECTION_STRING } = process.env
+
+export {
+    PORT,
+    JWT_SECRET,
+    MONGO_CONNECTION_STRING
+}
