@@ -1,4 +1,4 @@
-import { createContext, ReactNode, useEffect, useMemo, useContext } from 'react'
+import { createContext, ReactNode, useEffect, useMemo, useContext, Dispatch } from 'react'
 import { useReducerWithMiddleware } from '../hooks/useReducerWithMiddleware'
 import { Response } from '../types/api'
 import { ICollection, Action, ActionType } from '../types/collection'
@@ -7,6 +7,7 @@ import { request } from '../utils/request'
 interface ICollectionContext {
     collections: ICollection[]
     loading: boolean
+    dispatch: Dispatch<Action>
 }
 
 const CollectionContext = createContext<ICollectionContext>({} as ICollectionContext)
@@ -16,8 +17,12 @@ const reducer = (state: ICollectionContext, { type, payload }: Action) => {
         case ActionType.FETCH_COLLECTIONS:
             return {
                 ...state,
-                collections: payload,
-                loading: false
+                collections: payload
+            }
+        case ActionType.CREATE_COLLECTION:
+            return {
+                ...state,
+                collections: [...state.collections, payload]
             }
     }
 }
@@ -35,7 +40,7 @@ export const CollectionProvider = ({ children }: { children: ReactNode }) => {
         })()
     }, [])
 
-    const memoedValue = useMemo(() => state, [state])
+    const memoedValue = useMemo(() => ({ ...state, dispatch }), [state])
 
     return <CollectionContext.Provider value={memoedValue}>{children}</CollectionContext.Provider>
 }

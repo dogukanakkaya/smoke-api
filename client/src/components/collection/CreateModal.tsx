@@ -1,21 +1,28 @@
 import { ChangeEvent, SyntheticEvent, useState } from 'react'
+import useCollection from '../../context/useCollection'
 import { Response } from '../../types/api'
+import { ActionType, ICollection } from '../../types/collection'
 import { request } from '../../utils/request'
 import Form from '../form/Form'
 
 const CreateModal = ({ show, setShow }: { show: boolean, setShow: Function }) => {
     const [title, setTitle] = useState<string>('')
+    const { dispatch } = useCollection()
 
     const handleSubmit = async (e: SyntheticEvent) => {
         e.preventDefault()
 
-        const response: Response<{}> = await request.post('/collection', {
+        const response: Response<{ collection: ICollection }> = await request.post('/collection', {
             title
         })
+
+        dispatch({ type: ActionType.CREATE_COLLECTION, payload: response.data.collection })
+
+        setShow(false)
     }
 
     return (
-        <div className={`${!show ? 'hidden' : ''} min-w-screen h-screen animated fadeIn faster fixed left-0 top-0 flex justify-center items-start inset-0 z-50 outline-none focus:outline-none bg-no-repeat bg-center bg-cover`}>
+        <div className={`${!show ? 'hidden ' : ''}min-w-screen h-screen animated fadeIn faster fixed left-0 top-0 flex justify-center items-start inset-0 z-50 outline-none focus:outline-none bg-no-repeat bg-center bg-cover`}>
             <div className="absolute bg-black opacity-60 inset-0 z-0" />
             <div className="w-full max-w-lg relative mx-auto mt-48 rounded-xl shadow-lg bg-white overflow-hidden">
                 <div className="p-5 bg-gray-100">

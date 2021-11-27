@@ -5,7 +5,8 @@ export interface ICollection {
 }
 
 export enum ActionType {
-    FETCH_COLLECTIONS = 'FETCH_COLLECTIONS'
+    FETCH_COLLECTIONS = 'FETCH_COLLECTIONS',
+    CREATE_COLLECTION = 'CREATE_COLLECTION'
 }
 
-export type Action = { type: ActionType, payload: ICollection[] }
+export type Action = { type: ActionType, payload: ICollection[] | ICollection }
