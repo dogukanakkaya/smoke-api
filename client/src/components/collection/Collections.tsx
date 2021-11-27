@@ -1,21 +1,9 @@
-import { useState, useEffect } from 'react'
 import Card from './Card'
 import { ICollection } from '../../types/collection'
-import { request } from '../../utils/request'
-import { Response } from '../../types/api'
+import useCollection from '../../context/useCollection'
 
 const Collections = () => {
-    const [loading, setLoading] = useState<boolean>(true)
-    const [collections, setCollections] = useState<ICollection[]>([])
-
-    useEffect(() => {
-        (async () => {
-            const response: Response<{ collections: ICollection[] }> = await request.get(`/collection`)
-            setCollections(response.data.collections);
-
-            setLoading(false)
-        })()
-    }, [])
+    const { loading, collections } = useCollection()
 
     return (
         <div className="container">

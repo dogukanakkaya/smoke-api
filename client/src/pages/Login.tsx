@@ -1,7 +1,7 @@
 import { ChangeEvent, SyntheticEvent, useState } from 'react'
 import { Navigate } from 'react-router-dom'
 import Form from '../components/form/Form'
-import useAuth from '../hooks/useAuth'
+import useAuth from '../context/useAuth'
 
 const Login = () => {
     const { user, loading, login } = useAuth()

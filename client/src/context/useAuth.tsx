@@ -17,16 +17,14 @@ interface IUser {
     email: string
 }
 
-interface AuthContextType {
+interface IAuthContext {
     user: IUser | null
     loading: boolean
     login: (email: string, password: string) => void
     logout: () => void
 }
 
-const AuthContext = createContext<AuthContextType>(
-    {} as AuthContextType
-)
+const AuthContext = createContext<IAuthContext>({} as IAuthContext)
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
     const [user, setUser] = useState<IUser | null>(null)

@@ -1,6 +1,6 @@
 import React from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import { AuthProvider } from './hooks/useAuth'
+import { AuthProvider } from './context/useAuth'
 
 const Dashboard = React.lazy(() => import('./pages/Dashboard'))
 const Login = React.lazy(() => import('./pages/Login'))
