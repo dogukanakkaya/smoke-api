@@ -36,10 +36,10 @@ passport.use(new PassportLocal.Strategy({ usernameField: 'email' }, async (email
 router.post('/login', (req: Request, res: Response) => {
     passport.authenticate('local', (err, user) => {
         if (!user) {
-            return res.status(401).json({
+            return res.json({
                 status: 0,
                 message: err.message
-            })
+            }).status(401)
         }
 
         const token = jwt.sign({
@@ -78,15 +78,15 @@ router.post('/register', async (req: Request, res: Response) => {
             }
         })
     } catch (err: any) {
-        return res.status(422).json({
+        return res.json({
             status: 0,
             message: err.message
-        })
+        }).status(422)
     }
 })
 
 router.post('/logout', async (req: Request, res: Response) => {
-    return res.clearCookie('access_token').json({ status: 1 })
+    return res.json({ status: 1 }).clearCookie('access_token')
 })
 
 export default router

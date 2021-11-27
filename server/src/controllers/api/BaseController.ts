@@ -22,7 +22,7 @@ router.get('/me', (req: Request, res: Response) => {
             }
         })
     } catch (err) {
-        return res.status(403).json({ status: 0 })
+        return res.json({ status: 0 }).clearCookie('access_token').status(403)
     }
 })
 
