@@ -1,9 +1,9 @@
 import { useState } from 'react'
 import { Navigate } from 'react-router-dom'
-import CreateModal from '../components/collection/CreateModal'
+import FormModal from '../components/collection/FormModal'
 import useAuth from '../context/useAuth'
 import Collections from '../components/collection/Collections'
-import { CollectionProvider } from '../context/useCollection'
+import { CollectionProvider } from '../context/collection/useCollection'
 
 
 const Dashboard = () => {
@@ -21,7 +21,7 @@ const Dashboard = () => {
             </div>
             <CollectionProvider>
                 <Collections />
-                <CreateModal show={showCreateModal} setShow={setShowCreateModal} />
+                <FormModal show={showCreateModal} setShow={setShowCreateModal} />
             </CollectionProvider>
         </div>
     )

@@ -1,24 +1,17 @@
 import { ChangeEvent, SyntheticEvent, useState } from 'react'
-import useCollection from '../../context/useCollection'
-import { Response } from '../../types/api'
-import { ActionType, ICollection, LoadingType } from '../../types/collection'
-import { request } from '../../utils/request'
+import useCollection from '../../context/collection/useCollection'
 import Form from '../form/Form'
 
-const CreateModal = ({ show, setShow }: { show: boolean, setShow: Function }) => {
+const FormModal = ({ show, setShow }: { show: boolean, setShow: Function }) => {
     const [title, setTitle] = useState<string>('')
-    const { dispatch } = useCollection()
+    const { create } = useCollection()
 
     const handleSubmit = async (e: SyntheticEvent) => {
         e.preventDefault()
 
-        const response: Response<{ collection: ICollection }> = await request.post('/collection', {
+        create({
             title
-        })
-
-        dispatch({ type: ActionType.CREATE_COLLECTION, payload: response.data.collection })
-
-        setShow(false)
+        }, () => setShow(false))
     }
 
     return (
@@ -49,4 +42,4 @@ const CreateModal = ({ show, setShow }: { show: boolean, setShow: Function }) =>
     )
 }
 
-export default CreateModal
+export default FormModal

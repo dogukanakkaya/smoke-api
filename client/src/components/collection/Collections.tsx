@@ -1,6 +1,6 @@
 import Card from './Card'
-import { ICollection } from '../../types/collection'
-import useCollection from '../../context/useCollection'
+import { ICollection } from '../../context/collection/types'
+import useCollection from '../../context/collection/useCollection'
 
 const Collections = () => {
     const { loading, collections } = useCollection()

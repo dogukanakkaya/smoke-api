@@ -1,5 +1,4 @@
 import { useReducer, Reducer, ReducerState, ReducerAction, Dispatch } from 'react'
-import { LoadingType } from '../types/collection'
 
 // TODO: improve this later to run start and end middlewares that will set loading to true and false
 export function useReducerWithMiddleware<R extends Reducer<any, any>>(

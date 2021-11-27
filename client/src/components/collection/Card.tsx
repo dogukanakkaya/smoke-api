@@ -1,4 +1,4 @@
-import { ICollection } from "../../types/collection"
+import { ICollection } from "../../context/collection/types"
 
 const Card = ({ collection }: { collection: ICollection }) => {
     return (

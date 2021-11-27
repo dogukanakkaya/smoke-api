@@ -8,9 +8,9 @@ const Form = ({ children, ...otherProps }: IForm) => {
         <form {...otherProps}>{children}</form>
     )
 }
-
-interface IFormItem {
-    children: ReactNode
+export interface IFormItem {
+    className?: string
+    children?: ReactNode
     [key: string]: unknown
 }
 

@@ -1,9 +1,10 @@
 import axios from 'axios'
+import { AxiosResponse } from "axios";
 import { API_URL } from './config'
 
 axios.defaults.withCredentials = true
 
-const request = axios.create({
+export const request = axios.create({
     baseURL: API_URL,
     timeout: 30000,
     headers: {
@@ -14,7 +15,6 @@ const request = axios.create({
         return status >= 200 && status <= 450;
     }
 })
+export interface Response<T, D = any> extends AxiosResponse<{ status: number } & T, D> {
 
-export {
-    request
 }

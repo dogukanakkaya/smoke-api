@@ -4,9 +4,12 @@ export interface ICollection {
     createdAt: Date // Date
 }
 
+export interface IModifiableCollection {
+    title: string
+}
+
 export enum LoadingType {
-    START_LOADING = 'START_LOADING',
-    END_LOADING = 'END_LOADING'
+    START_LOADING = 'START_LOADING'
 }
 
 export enum ActionType {
