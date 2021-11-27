@@ -4,14 +4,45 @@
 @tailwind components;
 @tailwind utilities;
 
+body {
+    @apply bg-gray-50 text-xs text-gray-500 sm:text-sm;
+}
+
+.s-group {
+    @apply relative z-0 w-full mb-5
+}
+
 .s-label {
-    @apply block mb-2 text-sm text-gray-600 
+    @apply absolute duration-300 top-3 -z-1 origin-0 text-gray-500
 }
 
 .s-input {
-    @apply w-full px-3 py-2  rounded-md focus:outline-none focus:ring placeholder-gray-300 border border-gray-300 focus:ring-indigo-100 focus:border-indigo-300
+    @apply text-gray-600 pt-3 pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-black border-gray-200
 }
 
 .s-btn {
-    @apply w-full px-3 py-4 rounded-md focus:outline-none
+    @apply px-4 py-2 rounded-md focus:outline-none
+}
+
+.origin-0 {
+    transform-origin: 0%;
+}
+
+.s-input:focus ~ .s-label,
+.s-input:not(:placeholder-shown) ~ .s-label,
+.s-textarea:focus ~ .s-label,
+.s-textarea:not(:placeholder-shown) ~ .s-label,
+.s-select:focus ~ .s-label,
+.s-select:not([value='']):valid ~ .s-label {
+    --tw-translate-x: 0;
+    --tw-rotate: 0;
+    --tw-skew-x: 0;
+    --tw-skew-y: 0;
+    transform: translateX(var(--tw-translate-x)) translateY(var(--tw-translate-y)) rotate(var(--tw-rotate))
+        skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+    --tw-scale-x: 0.85;
+    --tw-scale-y: 0.85;
+    --tw-translate-y: -1.5rem;
+
+    @apply text-black;
 }

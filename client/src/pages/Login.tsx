@@ -1,5 +1,6 @@
 import { ChangeEvent, SyntheticEvent, useState } from 'react'
 import { Navigate } from 'react-router-dom'
+import Form from '../components/form/Form'
 import useAuth from '../hooks/useAuth'
 
 const Login = () => {
@@ -23,19 +24,16 @@ const Login = () => {
                         <h1 className="my-3 text-3xl font-semibold text-gray-700">Login</h1>
                     </div>
                     <div className="m-7">
-                        <form onSubmit={handleSubmit}>
-                            <div className="mb-6">
-                                <label className="s-label">
-                                    Email
-                                </label>
-                                <input className="s-input" type="email" onChange={(e: ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)} />
-                            </div>
-                            <div className="mb-6">
-                                <label className="s-label">
-                                    Password
-                                </label>
-                                <input className="s-input" type="password" onChange={(e: ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)} />
-                            </div>
+                        <Form onSubmit={handleSubmit}>
+                            <Form.Group>
+                                <Form.Input type="email" onChange={(e: ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)} value={email} autofocus="true" />
+                                <Form.Label>Email</Form.Label>
+                            </Form.Group>
+                            <Form.Group>
+                                <Form.Input type="password" onChange={(e: ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)} value={password} />
+                                <Form.Label>Password</Form.Label>
+                            </Form.Group>
+
                             <div className="mb-6">
                                 <button
                                     type="submit"
@@ -45,7 +43,7 @@ const Login = () => {
                                     {loading ? <i className='bi bi-arrow-counterclockwise animate-spin' /> : <>Submit</>}
                                 </button>
                             </div>
-                        </form>
+                        </Form>
                     </div>
                 </div>
             </div>
