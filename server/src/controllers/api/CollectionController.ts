@@ -31,6 +31,7 @@ router.get('/', async (req: Request, res: Response) => {
         return res.json({
             status: 1,
             collection: {
+                _id: collection._id,
                 title,
                 createdAt: collection.createdAt
             }
