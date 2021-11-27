@@ -18,7 +18,7 @@ const CreateModal = () => {
                     <h1 className="text-gray-800 text-base"><i className="bi bi-list align-middle"></i> Create a Collection</h1>
                 </div>
                 <div className="p-5">
-                    <Form omSubmit={handleSubmit}>
+                    <Form onSubmit={handleSubmit}>
                         <div>
                             <Form.Group>
                                 <Form.Input onChange={(e: ChangeEvent<HTMLInputElement>) => setTitle(e.target.value)} value={title} />

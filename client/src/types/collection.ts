@@ -1,5 +1,5 @@
-export interface Collection {
-    id: number
+export interface ICollection {
+    _id: string
     title: string
-    createdAt: string // Date
+    createdAt: Date // Date
 }

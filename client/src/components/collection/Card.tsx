@@ -1,6 +1,6 @@
-import { Collection } from "../../types/collection"
+import { ICollection } from "../../types/collection"
 
-const Card = ({ collection }: { collection: Collection }) => {
+const Card = ({ collection }: { collection: ICollection }) => {
     return (
         <div className="p-4 shadow bg-white transition duration-300 hover:bg-gray-100 h-48">
             <div className="flex flex-col justify-between h-full">

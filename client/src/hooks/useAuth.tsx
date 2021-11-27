@@ -7,7 +7,7 @@ import {
     useState,
 } from 'react'
 import { request } from '../utils/request'
-import { API_URL } from '../utils/config'
+import { BASE_URL } from '../utils/config'
 
 import { useNavigate } from 'react-router-dom'
 
@@ -37,7 +37,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     useEffect(() => {
         (async () => {
             setLoading(true)
-            const { data } = await request.get(`${API_URL}/api/me`)
+            const { data } = await request.get(`/me`)
 
             if (data.status) {
                 setUser(data.user)
@@ -48,7 +48,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
     const login = async (email: string, password: string) => {
         setLoading(true)
-        const { data } = await request.post(`${API_URL}/auth/login`, { email, password })
+        const { data } = await request.post(`${BASE_URL}/auth/login`, { email, password })
 
         if (data.status) {
             setUser(data.user)
@@ -58,7 +58,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     }
 
     const logout = async () => {
-        const { data } = await request.post(`${API_URL}/auth/logout`)
+        const { data } = await request.post(`${BASE_URL}/auth/logout`)
 
         if (data.status) {
             setUser(null)

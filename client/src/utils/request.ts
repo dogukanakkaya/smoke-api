@@ -1,8 +1,10 @@
 import axios from 'axios'
+import { API_URL } from './config'
 
 axios.defaults.withCredentials = true
 
 const request = axios.create({
+    baseURL: API_URL,
     timeout: 30000,
     headers: {
         'Content-Type': 'application/json',
