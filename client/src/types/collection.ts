@@ -4,9 +4,14 @@ export interface ICollection {
     createdAt: Date // Date
 }
 
+export enum LoadingType {
+    START_LOADING = 'START_LOADING',
+    END_LOADING = 'END_LOADING'
+}
+
 export enum ActionType {
     FETCH_COLLECTIONS = 'FETCH_COLLECTIONS',
     CREATE_COLLECTION = 'CREATE_COLLECTION'
 }
 
-export type Action = { type: ActionType, payload: ICollection[] | ICollection }
+export type Action = { type: ActionType | LoadingType, payload?: ICollection[] | ICollection }

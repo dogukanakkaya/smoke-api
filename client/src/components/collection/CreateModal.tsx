@@ -1,7 +1,7 @@
 import { ChangeEvent, SyntheticEvent, useState } from 'react'
 import useCollection from '../../context/useCollection'
 import { Response } from '../../types/api'
-import { ActionType, ICollection } from '../../types/collection'
+import { ActionType, ICollection, LoadingType } from '../../types/collection'
 import { request } from '../../utils/request'
 import Form from '../form/Form'
 

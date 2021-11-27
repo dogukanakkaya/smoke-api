@@ -1,7 +1,7 @@
 import { createContext, ReactNode, useEffect, useMemo, useContext, Dispatch } from 'react'
 import { useReducerWithMiddleware } from '../hooks/useReducerWithMiddleware'
 import { Response } from '../types/api'
-import { ICollection, Action, ActionType } from '../types/collection'
+import { ICollection, Action, ActionType, LoadingType } from '../types/collection'
 import { request } from '../utils/request'
 
 interface ICollectionContext {
@@ -14,15 +14,22 @@ const CollectionContext = createContext<ICollectionContext>({} as ICollectionCon
 
 const reducer = (state: ICollectionContext, { type, payload }: Action) => {
     switch (type) {
+        case LoadingType.START_LOADING:
+            return {
+                ...state,
+                loading: true
+            }
         case ActionType.FETCH_COLLECTIONS:
             return {
                 ...state,
-                collections: payload
+                collections: payload,
+                loading: false
             }
         case ActionType.CREATE_COLLECTION:
             return {
                 ...state,
-                collections: [...state.collections, payload]
+                collections: [...state.collections, payload],
+                loading: false
             }
     }
 }
@@ -35,7 +42,10 @@ export const CollectionProvider = ({ children }: { children: ReactNode }) => {
 
     useEffect(() => {
         (async () => {
+            dispatch({ type: LoadingType.START_LOADING })
+
             const response: Response<{ collections: ICollection[] }> = await request.get(`/collection`)
+
             dispatch({ type: ActionType.FETCH_COLLECTIONS, payload: response.data.collections })
         })()
     }, [])

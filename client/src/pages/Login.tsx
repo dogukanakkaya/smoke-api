@@ -26,7 +26,7 @@ const Login = () => {
                     <div className="m-7">
                         <Form onSubmit={handleSubmit}>
                             <Form.Group>
-                                <Form.Input type="email" onChange={(e: ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)} value={email} autofocus="true" />
+                                <Form.Input type="email" onChange={(e: ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)} value={email} autoFocus={true} />
                                 <Form.Label>Email</Form.Label>
                             </Form.Group>
                             <Form.Group>
