@@ -1,13 +1,17 @@
 import { ChangeEvent, SyntheticEvent, useState } from 'react'
+import { Response } from '../../types/api'
+import { request } from '../../utils/request'
 import Form from '../form/Form'
 
 const CreateModal = () => {
     const [title, setTitle] = useState<string>('')
 
-    const handleSubmit = (e: SyntheticEvent) => {
+    const handleSubmit = async (e: SyntheticEvent) => {
         e.preventDefault()
 
-
+        const response: Response<{}> = await request.post('/collection', {
+            title
+        })
     }
 
     return (
@@ -29,7 +33,7 @@ const CreateModal = () => {
                             <button className="mb-2 md:mb-0 bg-white px-5 py-2 text-sm shadow-sm font-medium tracking-wider border text-gray-600 rounded-full hover:shadow-lg hover:bg-gray-100">
                                 Cancel
                             </button>
-                            <button className="mb-2 md:mb-0 bg-green-500 border border-green-500 px-5 py-2 text-sm shadow-sm font-medium tracking-wider text-white rounded-full hover:shadow-lg hover:bg-green-600">Create</button>
+                            <button type="submit" className="mb-2 md:mb-0 bg-green-500 border border-green-500 px-5 py-2 text-sm shadow-sm font-medium tracking-wider text-white rounded-full hover:shadow-lg hover:bg-green-600">Create</button>
                         </div>
                     </Form>
                 </div>
