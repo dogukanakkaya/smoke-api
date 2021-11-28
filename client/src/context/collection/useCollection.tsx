@@ -10,6 +10,7 @@ export interface ICollectionContext {
     showModal: boolean
     create: (collection: IModifiableCollection) => void
     update: (_id: string, collection: IModifiableCollection) => void
+    destroy: (_id: string) => void
 }
 
 const CollectionContext = createContext<ICollectionContext>({} as ICollectionContext)
@@ -46,7 +47,15 @@ export const CollectionProvider = ({ children }: { children: ReactNode }) => {
         dispatch({ type: ActionType.UPDATE_COLLECTION, payload: response.data.collection })
     }
 
-    const memoedValue = useMemo(() => ({ ...state, create, update }), [state])
+    const destroy = async (_id: string, collection: IModifiableCollection) => {
+        //dispatch({ type: LoadingType.START_LOADING })
+
+        const response: Response<{ collection: ICollection }> = await request.delete(`/collection/${_id}`)
+
+        dispatch({ type: ActionType.DELETE_COLLECTION, payload: response.data.collection })
+    }
+
+    const memoedValue = useMemo(() => ({ ...state, create, update, destroy }), [state])
 
     return <CollectionContext.Provider value={memoedValue}>{children}</CollectionContext.Provider>
 }

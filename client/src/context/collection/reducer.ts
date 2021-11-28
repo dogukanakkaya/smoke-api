@@ -22,13 +22,19 @@ export const reducer = (state: ICollectionContext, { type, payload }: Action) =>
             }
         case ActionType.UPDATE_COLLECTION:
             // convert payload to ICollection type cause what is returned from update
-            // is absolutely ICollection if no error returned
+            // is absolutely ICollection if response has no exception
             const newCollection = payload as ICollection
             state.collections[state.collections.findIndex((collection: ICollection) => collection._id === newCollection._id)] = newCollection
 
             return {
                 ...state,
                 collections: state.collections,
+                loading: false
+            }
+        case ActionType.DELETE_COLLECTION:
+            return {
+                ...state,
+                collections: state.collections.filter((collection: ICollection) => collection._id !== (payload as ICollection)._id),
                 loading: false
             }
     }

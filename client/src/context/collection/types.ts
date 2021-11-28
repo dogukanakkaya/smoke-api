@@ -15,7 +15,8 @@ export enum LoadingType {
 export enum ActionType {
     FETCH_COLLECTIONS = 'FETCH_COLLECTIONS',
     CREATE_COLLECTION = 'CREATE_COLLECTION',
-    UPDATE_COLLECTION = 'UPDATE_COLLECTION'
+    UPDATE_COLLECTION = 'UPDATE_COLLECTION',
+    DELETE_COLLECTION = 'DELETE_COLLECTION'
 }
 
 export type Action = { type: ActionType | LoadingType, payload?: ICollection[] | ICollection }
