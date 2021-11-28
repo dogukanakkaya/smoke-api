@@ -32,10 +32,8 @@ const FormModal = ({ show, setShow }: { show: boolean, setShow: Function }) => {
                             </Form.Group>
                         </div>
                         <div className="mt-2 text-center space-x-4 md:block">
-                            <button type="button" onClick={() => setShow(false)} className="mb-2 md:mb-0 bg-white px-5 py-2 text-sm shadow-sm font-medium tracking-wider border text-gray-600 rounded-full hover:shadow-lg hover:bg-gray-100">
-                                Cancel
-                            </button>
-                            <button type="submit" className="mb-2 md:mb-0 bg-green-500 border border-green-500 px-5 py-2 text-sm shadow-sm font-medium tracking-wider text-white rounded-full hover:shadow-lg hover:bg-green-600">Create</button>
+                            <Form.Button onClick={() => setShow(false)} className="bg-white text-gray-600 hover:bg-gray-100">Cancel</Form.Button>
+                            <Form.Button className="text-white bg-green-500 border-green-500 hover:bg-green-600">Create</Form.Button>
                         </div>
                     </Form>
                 </div>

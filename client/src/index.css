@@ -21,7 +21,7 @@ body {
 }
 
 .s-btn {
-    @apply px-4 py-2 rounded-md focus:outline-none
+    @apply mb-2 md:mb-0 border px-5 py-2 text-sm shadow-sm font-medium tracking-wider rounded-full hover:shadow-lg
 }
 
 .origin-0 {

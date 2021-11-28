@@ -4,6 +4,7 @@ import FormModal from '../components/collection/FormModal'
 import useAuth from '../context/useAuth'
 import Collections from '../components/collection/Collections'
 import { CollectionProvider } from '../context/collection/useCollection'
+import Form from '../components/form/Form'
 
 
 const Dashboard = () => {
@@ -16,7 +17,7 @@ const Dashboard = () => {
         <div>
             <div className="container my-10">
                 <div className="flex justify-end">
-                    <button onClick={() => setShowCreateModal(true)} className="s-btn text-white bg-blue-500 hover:bg-blue-600">Create Collection <i className="bi bi-list"></i></button>
+                    <Form.Button onClick={() => setShowCreateModal(true)} className="text-white bg-blue-500 hover:bg-blue-600">Create Collection <i className="bi bi-list"></i></Form.Button>
                 </div>
             </div>
             <CollectionProvider>
