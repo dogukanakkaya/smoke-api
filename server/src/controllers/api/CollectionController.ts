@@ -24,8 +24,6 @@ router.get('/', async (req: Request, res: Response) => {
     const collection: HydratedDocument<ICollection> = new Collection({
         title
     })
-    console.log(collection);
-
 
     try {
         await collection.save()
