@@ -44,11 +44,11 @@ router.get('/', async (req: Request, res: Response) => {
             message: err.message
         }).status(422)
     }
-}).put('/:id', async (req: Request, res: Response) => {
+}).put('/:_id', async (req: Request, res: Response) => {
     const { title }: ICollection = req.body
 
     try {
-        const collection = await Collection.findByIdAndUpdate(req.params.id, { title })
+        const collection = await Collection.findByIdAndUpdate(req.params._id, { title })
 
         if (collection) {
             return res.json({
@@ -68,9 +68,9 @@ router.get('/', async (req: Request, res: Response) => {
             message: err.message
         }).status(422)
     }
-}).delete('/:id', async (req: Request, res: Response) => {
+}).delete('/:_id', async (req: Request, res: Response) => {
     try {
-        const collection = await Collection.findByIdAndDelete(req.params.id)
+        const collection = await Collection.findByIdAndDelete(req.params._id)
 
         if (collection) {
             return res.json({
