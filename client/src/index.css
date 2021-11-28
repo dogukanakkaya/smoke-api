@@ -17,11 +17,15 @@ body {
 }
 
 .s-input {
-    @apply text-gray-600 pt-3 pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-black border-gray-200
+    @apply text-gray-600 pt-3 pb-2 block w-full mt-0 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-black border-gray-200
 }
 
 .s-btn {
     @apply mb-2 md:mb-0 border px-5 py-2 text-sm shadow-sm font-medium tracking-wider rounded-full hover:shadow-lg
+}
+
+.s-sidebar-item {
+    @apply flex flex-col items-center cursor-pointer p-4 border-b font-bold shadow-sm bg-white hover:bg-gray-100
 }
 
 .origin-0 {

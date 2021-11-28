@@ -1,11 +1,10 @@
-import { useState } from 'react'
-import { Navigate } from 'react-router-dom'
-import FormModal from '../components/collection/FormModal'
+import React, { useState } from 'react'
+import { Navigate, Routes, Route } from 'react-router-dom'
 import useAuth from '../context/useAuth'
-import Collections from '../components/collection/Collections'
 import { CollectionProvider } from '../context/collection/useCollection'
-import Form from '../components/form/Form'
-
+import Sidebar from '../components/collection/Sidebar'
+import Request from '../components/request/Request'
+import FormModal from '../components/collection/FormModal'
 
 const Dashboard = () => {
     const { user, logout } = useAuth()
@@ -14,17 +13,21 @@ const Dashboard = () => {
     if (!user) return <Navigate to='/login' />
 
     return (
-        <div>
-            <div className="container my-10">
-                <div className="flex justify-end">
-                    <Form.Button onClick={() => setShowCreateModal(true)} className="text-white bg-blue-500 hover:bg-blue-600">Create Collection <i className="bi bi-list"></i></Form.Button>
-                </div>
+        <CollectionProvider>
+            <div className="grid grid-cols-12">
+                <Sidebar setShowCreateModal={setShowCreateModal} />
+
+                <Routes>
+                    <Route path="/:_id" element={
+                        <React.Suspense fallback={<>...</>}>
+                            <Request />
+                        </React.Suspense>
+                    } />
+                </Routes>
             </div>
-            <CollectionProvider>
-                <Collections />
-                <FormModal show={showCreateModal} setShow={setShowCreateModal} />
-            </CollectionProvider>
-        </div>
+
+            <FormModal show={showCreateModal} setShow={setShowCreateModal} />
+        </CollectionProvider>
     )
 }
 

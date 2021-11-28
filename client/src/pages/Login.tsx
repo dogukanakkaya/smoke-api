@@ -34,14 +34,8 @@ const Login = () => {
                                 <Form.Label>Password</Form.Label>
                             </Form.Group>
 
-                            <div className="mb-6">
-                                <button
-                                    type="submit"
-                                    disabled={loading}
-                                    className={`s-btn flex items-center justify-center text-white bg-blue-500 hover:bg-blue-600 focus:bg-blue-700 ${loading ? 'opacity-60' : ''}`}
-                                >
-                                    {loading ? <i className='bi bi-arrow-counterclockwise animate-spin' /> : <>Submit</>}
-                                </button>
+                            <div className="mb-6 flex justify-end">
+                                <Form.Button type="submit" disabled={loading} className="text-white bg-green-500 border-green-500 hover:bg-green-600">{loading ? <>Wait <i className='bi bi-arrow-repeat inline-block animate-spin' /></> : <>Login <i className="bi bi-box-arrow-in-right"></i></>}</Form.Button>
                             </div>
                         </Form>
                     </div>

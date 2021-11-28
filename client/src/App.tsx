@@ -19,7 +19,7 @@ function App() {
                         }
                     />
                     <Route
-                        path="/"
+                        path="/*"
                         element={
                             <React.Suspense fallback={<>...</>}>
                                 <Dashboard />
