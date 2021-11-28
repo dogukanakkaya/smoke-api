@@ -24,6 +24,8 @@ router.get('/', async (req: Request, res: Response) => {
     const collection: HydratedDocument<ICollection> = new Collection({
         title
     })
+    console.log(collection);
+
 
     try {
         await collection.save()
@@ -55,6 +57,26 @@ router.get('/', async (req: Request, res: Response) => {
                     _id: collection._id,
                     title,
                     createdAt: collection.createdAt
+                }
+            })
+        }
+
+        throw new Error('Can\'t find collection with given id.')
+    } catch (err: any) {
+        return res.json({
+            status: 0,
+            message: err.message
+        }).status(422)
+    }
+}).delete('/:id', async (req: Request, res: Response) => {
+    try {
+        const collection = await Collection.findByIdAndDelete(req.params.id)
+
+        if (collection) {
+            return res.json({
+                status: 1,
+                collection: {
+                    _id: collection._id
                 }
             })
         }

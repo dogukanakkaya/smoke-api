@@ -14,7 +14,7 @@ import { IUser, User } from '../models/User'
 const router: Router = express.Router()
 
 passport.use(new PassportLocal.Strategy({ usernameField: 'email' }, async (email, password, done) => {
-    const user: IUser | null = await User.findOne({ email }).exec()
+    const user: IUser | null = await User.findOne({ email })
 
     if (!user) {
         return done({ message: 'Wrong credentials' }, false)
