@@ -1,5 +1,7 @@
 import express, { Request, Response, Router } from 'express'
-import { HydratedDocument, Types } from 'mongoose'
+
+// Database
+import { HydratedDocument } from 'mongoose'
 import { Collection, ICollection } from '../../models/Collection'
 
 const router: Router = express.Router()

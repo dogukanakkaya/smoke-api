@@ -1,6 +1,7 @@
 import env from 'dotenv'; env.config()
 import { PORT } from './config'
 import express, { Application } from 'express'
+import { graphqlHTTP } from 'express-graphql'
 
 // Controllers
 import AuthController from './controllers/AuthController'
@@ -15,6 +16,9 @@ import passport from 'passport'
 // Database
 import './db'
 
+// GraphQL
+import schema from './graphql/schema'
+
 const app: Application = express()
 
 // Use app middlewares
@@ -25,6 +29,13 @@ app.use(cors({
 app.use(express.json())
 app.use(passport.initialize())
 app.use(cookieParser())
+app.use(
+    '/graphql',
+    graphqlHTTP({
+        schema,
+        graphiql: true
+    })
+)
 
 // Define routes
 app.use('/auth', AuthController)
