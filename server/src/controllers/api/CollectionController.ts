@@ -33,10 +33,11 @@ router.get('/', async (req: Request, res: Response) => {
         })
     }
 }).post('/', async (req: Request, res: Response) => {
-    const { title }: ICollection = req.body
+    const { title, requests }: ICollection = req.body
 
     const collection: HydratedDocument<ICollection> = new Collection({
-        title
+        title,
+        requests
     })
 
     try {
@@ -47,6 +48,7 @@ router.get('/', async (req: Request, res: Response) => {
             collection: {
                 _id: collection._id,
                 title,
+                requests,
                 createdAt: collection.createdAt
             }
         })
@@ -68,6 +70,7 @@ router.get('/', async (req: Request, res: Response) => {
                 collection: {
                     _id: collection._id,
                     title,
+                    requests: collection.requests,
                     createdAt: collection.createdAt
                 }
             })
