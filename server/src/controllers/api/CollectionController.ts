@@ -6,11 +6,25 @@ const router: Router = express.Router()
 
 router.get('/', async (req: Request, res: Response) => {
     try {
-        const collections = await Collection.find({}).exec()
+        const collections = await Collection.find({})
 
         return res.json({
             status: 1,
             collections
+        })
+    } catch (err: any) {
+        return res.json({
+            status: 0,
+            message: err.message
+        })
+    }
+}).get('/:_id', async (req: Request, res: Response) => {
+    try {
+        const collection = await Collection.findById(req.params._id)
+
+        return res.json({
+            status: 1,
+            collection
         })
     } catch (err: any) {
         return res.json({
