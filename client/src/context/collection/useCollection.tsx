@@ -8,7 +8,8 @@ export interface ICollectionContext {
     collections: ICollection[]
     loading: boolean
     showModal: boolean
-    create: (collection: IModifiableCollection, cb: Function) => void
+    create: (collection: IModifiableCollection) => void
+    update: (_id: string, collection: IModifiableCollection) => void
 }
 
 const CollectionContext = createContext<ICollectionContext>({} as ICollectionContext)
@@ -29,16 +30,23 @@ export const CollectionProvider = ({ children }: { children: ReactNode }) => {
         })()
     }, [])
 
-    const create = async (collection: IModifiableCollection, cb: Function) => {
+    const create = async (collection: IModifiableCollection) => {
         dispatch({ type: LoadingType.START_LOADING })
 
         const response: Response<{ collection: ICollection }> = await request.post('/collection', collection)
-        cb()
 
         dispatch({ type: ActionType.CREATE_COLLECTION, payload: response.data.collection })
     }
 
-    const memoedValue = useMemo(() => ({ ...state, create }), [state])
+    const update = async (_id: string, collection: IModifiableCollection) => {
+        //dispatch({ type: LoadingType.START_LOADING })
+
+        const response: Response<{ collection: ICollection }> = await request.put(`/collection/${_id}`, collection)
+
+        dispatch({ type: ActionType.UPDATE_COLLECTION, payload: response.data.collection })
+    }
+
+    const memoedValue = useMemo(() => ({ ...state, create, update }), [state])
 
     return <CollectionContext.Provider value={memoedValue}>{children}</CollectionContext.Provider>
 }
