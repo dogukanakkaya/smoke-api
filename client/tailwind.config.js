@@ -8,6 +8,9 @@ module.exports = {
       },
       zIndex: {
         '-1': '-1',
+      },
+      fontSize: {
+        'xxs': '.65rem'
       }
     },
   },

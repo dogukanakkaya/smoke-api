@@ -14,6 +14,11 @@ export const reducer = (state: ICollectionContext, { type, payload }: Action) =>
                 collections: payload,
                 loading: false
             }
+        case ActionType.FETCH_COLLECTION:
+            return {
+                ...state,
+                loading: false
+            }
         case ActionType.CREATE_COLLECTION:
             return {
                 ...state,
@@ -24,11 +29,13 @@ export const reducer = (state: ICollectionContext, { type, payload }: Action) =>
             // convert payload to ICollection type cause what is returned from update
             // is absolutely ICollection if response has no exception
             const newCollection = payload as ICollection
-            state.collections[state.collections.findIndex((collection: ICollection) => collection._id === newCollection._id)] = newCollection
+
+            const collections = [...state.collections]
+            collections[collections.findIndex((collection: ICollection) => collection._id === newCollection._id)] = newCollection
 
             return {
                 ...state,
-                collections: state.collections,
+                collections: collections,
                 loading: false
             }
         case ActionType.DELETE_COLLECTION:

@@ -1,3 +1,4 @@
+import { ApolloQueryResult } from '@apollo/client';
 import axios from 'axios'
 import { AxiosResponse } from "axios";
 import { API_URL } from './config'
@@ -15,6 +16,10 @@ export const request = axios.create({
         return status >= 200 && status <= 450;
     }
 })
-export interface Response<T, D = any> extends AxiosResponse<{ status: number } & T, D> {
+export interface RestResponse<T, D = any> extends AxiosResponse<{ status: number } & T, D> {
+
+}
+
+export interface GraphQLResponse<T> extends ApolloQueryResult<{ status: number } & T> {
 
 }
