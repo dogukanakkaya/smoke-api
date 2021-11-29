@@ -1,9 +1,10 @@
-import { GraphQLObjectType, GraphQLString } from 'graphql'
+import { GraphQLObjectType, GraphQLID, GraphQLString } from 'graphql'
 import { GraphQLJSON } from 'graphql-type-json'
 
 export const RequestType = new GraphQLObjectType({
     name: 'Request',
     fields: {
+        _id: { type: GraphQLID },
         title: { type: GraphQLString },
         url: { type: GraphQLString },
         method: { type: GraphQLString },

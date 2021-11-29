@@ -1,4 +1,4 @@
-import { GraphQLSchema, GraphQLObjectType, GraphQLList } from 'graphql'
+import { GraphQLSchema, GraphQLObjectType, GraphQLList, GraphQLID } from 'graphql'
 
 // Database
 import { Collection } from '../models/Collection'
@@ -11,9 +11,17 @@ const RootQuery = new GraphQLObjectType({
     fields: {
         collections: {
             type: new GraphQLList(CollectionType),
-
             async resolve(parent, args) {
                 return await Collection.find().populate('requests')
+            }
+        },
+        collection: {
+            type: CollectionType,
+            args: {
+                id: { type: GraphQLID }
+            },
+            async resolve(parent, { id }) {
+                return await Collection.findById(id).populate('requests')
             }
         }
     }
