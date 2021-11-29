@@ -2,9 +2,11 @@ import { GraphQLSchema, GraphQLObjectType, GraphQLList, GraphQLID } from 'graphq
 
 // Database
 import { Collection } from '../models/Collection'
+import { Request } from '../models/Request'
 
 // Types
 import { CollectionType } from './types/collection'
+import { RequestType } from './types/request'
 
 const RootQuery = new GraphQLObjectType({
     name: 'RootQuery',
@@ -22,6 +24,15 @@ const RootQuery = new GraphQLObjectType({
             },
             async resolve(parent, { _id }) {
                 return await Collection.findById(_id).populate('requests')
+            }
+        },
+        request: {
+            type: RequestType,
+            args: {
+                _id: { type: GraphQLID }
+            },
+            async resolve(parent, { _id }) {
+                return await Request.findById(_id)
             }
         }
     }

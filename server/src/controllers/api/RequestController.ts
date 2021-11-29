@@ -6,21 +6,7 @@ import { Request as CollectionRequest, IRequest } from '../../models/Request'
 
 const router: Router = express.Router()
 
-router.get('/:_id', async (req: Request, res: Response) => {
-    try {
-        const request = await CollectionRequest.findById(req.params._id)
-
-        return res.json({
-            status: 1,
-            request
-        })
-    } catch (err: any) {
-        return res.json({
-            status: 0,
-            message: err.message
-        })
-    }
-}).post('/', async (req: Request, res: Response) => {
+router.post('/', async (req: Request, res: Response) => {
     const { title, url, method, queryParams, headers }: IRequest = req.body
 
     const request: HydratedDocument<IRequest> = new CollectionRequest({

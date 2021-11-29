@@ -6,35 +6,7 @@ import { Collection, ICollection } from '../../models/Collection'
 
 const router: Router = express.Router()
 
-router.get('/', async (req: Request, res: Response) => {
-    try {
-        const collections = await Collection.find({}).populate('requests')
-
-        return res.json({
-            status: 1,
-            collections
-        })
-    } catch (err: any) {
-        return res.json({
-            status: 0,
-            message: err.message
-        })
-    }
-}).get('/:_id', async (req: Request, res: Response) => {
-    try {
-        const collection = await Collection.findById(req.params._id)
-
-        return res.json({
-            status: 1,
-            collection
-        })
-    } catch (err: any) {
-        return res.json({
-            status: 0,
-            message: err.message
-        })
-    }
-}).post('/', async (req: Request, res: Response) => {
+router.post('/', async (req: Request, res: Response) => {
     const { title, requests }: ICollection = req.body
 
     const collection: HydratedDocument<ICollection> = new Collection({
@@ -50,7 +22,6 @@ router.get('/', async (req: Request, res: Response) => {
             collection: {
                 _id: collection._id,
                 title,
-                requests,
                 createdAt: collection.createdAt
             }
         })
@@ -64,7 +35,7 @@ router.get('/', async (req: Request, res: Response) => {
     const { title }: ICollection = req.body
 
     try {
-        const collection = await Collection.findByIdAndUpdate(req.params._id, { title })
+        const collection = await Collection.findByIdAndUpdate(req.params._id, { title }).populate('requests')
 
         if (collection) {
             return res.json({
