@@ -7,6 +7,7 @@ import jwt, { JwtPayload } from 'jsonwebtoken'
 // Controllers
 import UserController from './UserController'
 import CollectionController from './CollectionController'
+import RequestController from './RequestController'
 
 const router: Router = express.Router()
 
@@ -29,5 +30,6 @@ router.get('/me', (req: Request, res: Response) => {
 
 router.use('/user', UserController)
 router.use('/collection', CollectionController)
+router.use('/request', RequestController)
 
 export default router

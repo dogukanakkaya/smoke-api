@@ -8,7 +8,7 @@ const router: Router = express.Router()
 
 router.get('/', async (req: Request, res: Response) => {
     try {
-        const collections = await Collection.find({})
+        const collections = await Collection.find({}).populate('requests')
 
         return res.json({
             status: 1,

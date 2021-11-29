@@ -2,31 +2,15 @@ import mongoose, { ObjectId } from 'mongoose'
 
 const { Schema } = mongoose
 
-const RequestsSchema = new Schema<IRequest>({
-    title: {
-        type: String,
-        required: true
-    },
-    url: {
-        type: String,
-        required: true
-    },
-    queryParams: {
-        type: Map,
-        of: String
-    },
-    headers: {
-        type: Map,
-        of: String
-    }
-})
-
 const CollectionSchema = new Schema<ICollection>({
     title: {
         type: String,
         required: true
     },
-    requests: [RequestsSchema],
+    requests: [{
+        type: Schema.Types.ObjectId,
+        ref: 'Request'
+    }],
 }, {
     timestamps: true
 })
@@ -36,16 +20,20 @@ const Collection = mongoose.model<ICollection>('Collection', CollectionSchema)
 interface ICollection {
     _id: ObjectId
     title: string
-    requests: IRequest[]
+    requests: ObjectId[]
     createdAt: Date
     updatedAt: Date
 }
 
-interface IRequest {
-    title: string
-    url: string
-    queryParams: Map<string, string>
-    headers: Map<string, string>
+enum HTTPMethod {
+    DELETE = 'DELETE',
+    GET = 'GET',
+    HEAD = 'HEAD',
+    OPTIONS = 'OPTIONS',
+    PATCH = 'PATCH',
+    POST = 'POST',
+    PUT = 'PUT',
+    TRACE = 'TRACE'
 }
 
 export {

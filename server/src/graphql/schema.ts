@@ -12,8 +12,8 @@ const RootQuery = new GraphQLObjectType({
         collections: {
             type: new GraphQLList(CollectionType),
 
-            async resolve(parentValue, args) {
-                return await Collection.find()
+            async resolve(parent, args) {
+                return await Collection.find().populate('requests')
             }
         }
     }

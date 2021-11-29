@@ -1,15 +1,5 @@
 import { GraphQLObjectType, GraphQLList, GraphQLID, GraphQLString } from 'graphql'
-import { GraphQLJSON } from 'graphql-type-json'
-
-export const RequestType = new GraphQLObjectType({
-    name: 'Request',
-    fields: {
-        title: { type: GraphQLString },
-        url: { type: GraphQLString },
-        queryParams: { type: GraphQLJSON },
-        headers: { type: GraphQLJSON }
-    }
-})
+import { RequestType } from './request'
 
 export const CollectionType = new GraphQLObjectType({
     name: 'Collection',
