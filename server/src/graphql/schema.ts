@@ -18,10 +18,10 @@ const RootQuery = new GraphQLObjectType({
         collection: {
             type: CollectionType,
             args: {
-                id: { type: GraphQLID }
+                _id: { type: GraphQLID }
             },
-            async resolve(parent, { id }) {
-                return await Collection.findById(id).populate('requests')
+            async resolve(parent, { _id }) {
+                return await Collection.findById(_id).populate('requests')
             }
         }
     }
