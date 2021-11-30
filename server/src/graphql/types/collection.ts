@@ -1,5 +1,4 @@
 import { GraphQLObjectType, GraphQLList, GraphQLID, GraphQLString, GraphQLInputObjectType, GraphQLNonNull } from 'graphql'
-import { Request } from '../../models/Request';
 import { RequestType } from './request'
 
 export const CollectionType = new GraphQLObjectType({
