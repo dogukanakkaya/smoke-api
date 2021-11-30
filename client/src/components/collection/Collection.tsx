@@ -1,5 +1,4 @@
 import { ChangeEvent, useState } from 'react'
-import { useNavigate } from 'react-router'
 import { ICollection } from '../../context/collection/types'
 import useCollection from '../../context/collection/useCollection'
 import Requests from './Requests'
@@ -8,7 +7,6 @@ const Collection = ({ collection }: { collection: ICollection }) => {
     const { update, destroy } = useCollection()
     const [title, setTitle] = useState<string>(collection.title)
     const [showButtons, setShowButtons] = useState<boolean>(false)
-    const navigate = useNavigate()
 
     const handleUpdate = async (_id: string) => {
         await update(_id, { title })
@@ -19,7 +17,7 @@ const Collection = ({ collection }: { collection: ICollection }) => {
     }
 
     return (
-        <li onClick={() => navigate(`/${collection._id}`)} onMouseEnter={() => setShowButtons(true)} onMouseLeave={() => setShowButtons(false)}>
+        <li onMouseEnter={() => setShowButtons(true)} onMouseLeave={() => setShowButtons(false)}>
             <div className="flex justify-between items-center p-2 hover:bg-gray-100">
                 <span><i className="bi bi-chevron-right"></i> <input value={title} onChange={(e: ChangeEvent<HTMLInputElement>) => setTitle(e.target.value)} onBlur={() => handleUpdate(collection._id)} className="px-2 py-1 outline-none" /></span>
                 <div className={`${!showButtons ? 'invisible opacity-0' : ''} flex items-center`}>

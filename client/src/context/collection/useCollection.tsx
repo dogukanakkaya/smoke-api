@@ -1,9 +1,11 @@
 import { createContext, ReactNode, useEffect, useMemo, useContext, Dispatch } from 'react'
 import { useReducerWithMiddleware } from '../../hooks/useReducerWithMiddleware'
-import { GraphQLMutationResult, GraphQLQueryResult, request, RestResponse } from '../../utils/request'
+import { GraphQLMutationResult, GraphQLQueryResult } from '../../utils/request'
 import { reducer } from './reducer'
 import { ActionType, LoadingType, ICollection, IModifiableCollection } from './types'
-import { gql, useApolloClient } from '@apollo/client'
+import { useApolloClient } from '@apollo/client'
+import { COLLECTION_QUERY, COLLECTIONS_QUERY } from '../../graphql/collection/query'
+import { CREATE_COLLECTION_MUTATION, UPDATE_COLLECTION_MUTATION, DELETE_COLLECTION_MUTATION } from '../../graphql/collection/mutation'
 
 export interface ICollectionContext {
     collections: ICollection[]
@@ -29,22 +31,8 @@ export const CollectionProvider = ({ children }: { children: ReactNode }) => {
             dispatch({ type: LoadingType.START_LOADING })
 
             const response: GraphQLQueryResult<{ collections: ICollection[] }> = await client.query({
-                query: gql`
-                    query {
-                        collections{
-                            _id
-                            title
-                            requests {
-                                _id
-                                title
-                                method
-                            }
-                        }
-                    }
-                `
+                query: COLLECTIONS_QUERY
             })
-
-            //const response: RestResponse<{ collections: ICollection[] }> = await request.get(`/collection`)
 
             dispatch({ type: ActionType.FETCH_COLLECTIONS, payload: response.data.collections })
         })()
@@ -54,22 +42,7 @@ export const CollectionProvider = ({ children }: { children: ReactNode }) => {
         dispatch({ type: LoadingType.START_LOADING })
 
         const response: GraphQLQueryResult<{ collection: ICollection }> = await client.query({
-            query: gql`
-                query Collection($_id: ID!) {
-                    collection(_id: $_id) {
-                        _id
-                        title
-                        requests {
-                            _id
-                            title
-                            url
-                            method
-                            queryParams
-                            headers
-                        }
-                    }
-                }
-            `,
+            query: COLLECTION_QUERY,
             variables: { _id }
         })
 
@@ -82,19 +55,7 @@ export const CollectionProvider = ({ children }: { children: ReactNode }) => {
         dispatch({ type: LoadingType.START_LOADING })
 
         const response: GraphQLMutationResult<{ createCollection: ICollection }> = await client.mutate({
-            mutation: gql`
-                mutation CreateCollection($input: CollectionInput!) {
-                    createCollection(input: $input) {
-                        _id
-                        title
-                        requests {
-                            _id
-                            title
-                            method
-                        }
-                    }
-                }
-            `,
+            mutation: CREATE_COLLECTION_MUTATION,
             variables: { input: collection }
         })
 
@@ -105,19 +66,7 @@ export const CollectionProvider = ({ children }: { children: ReactNode }) => {
         //dispatch({ type: LoadingType.START_LOADING })
 
         const response: GraphQLMutationResult<{ updateCollection: ICollection }> = await client.mutate({
-            mutation: gql`
-                mutation UpdateCollection($_id: ID!, $input: CollectionInput!) {
-                    updateCollection(_id: $_id, input: $input) {
-                        _id
-                        title
-                        requests {
-                            _id
-                            title
-                            method
-                        }
-                    }
-                }
-            `,
+            mutation: UPDATE_COLLECTION_MUTATION,
             variables: { _id, input: collection }
         })
 
@@ -128,19 +77,7 @@ export const CollectionProvider = ({ children }: { children: ReactNode }) => {
         //dispatch({ type: LoadingType.START_LOADING })
 
         const response: GraphQLMutationResult<{ deleteCollection: ICollection }> = await client.mutate({
-            mutation: gql`
-                mutation DeleteCollection($_id: ID!) {
-                    deleteCollection(_id: $_id) {
-                        _id
-                        title
-                        requests {
-                            _id
-                            title
-                            method
-                        }
-                    }
-                }
-            `,
+            mutation: DELETE_COLLECTION_MUTATION,
             variables: { _id }
         })
 

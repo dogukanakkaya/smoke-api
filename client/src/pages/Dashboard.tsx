@@ -18,7 +18,7 @@ const Dashboard = () => {
                 <Sidebar setShowCreateModal={setShowCreateModal} />
 
                 <Routes>
-                    <Route path="/:_id" element={
+                    <Route path="/request/:_id" element={
                         <React.Suspense fallback={<>...</>}>
                             <Request />
                         </React.Suspense>

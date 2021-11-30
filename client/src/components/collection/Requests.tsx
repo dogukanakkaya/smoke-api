@@ -1,4 +1,5 @@
-import { IRequest } from "../../context/collection/types"
+import { useNavigate } from 'react-router'
+import { IRequest } from '../../context/collection/types'
 
 const Requests = ({ requests }: { requests: IRequest[] }) => {
     return (
@@ -11,8 +12,10 @@ const Requests = ({ requests }: { requests: IRequest[] }) => {
 }
 
 const Request = ({ request }: { request: IRequest }) => {
+    const navigate = useNavigate()
+
     return (
-        <li className="cursor-pointer pl-10 p-2 hover:bg-gray-100">
+        <li onClick={() => navigate(`/request/${request._id}`)} className="cursor-pointer pl-10 p-2 hover:bg-gray-100">
             <span className="text-xxs pr-1 text-green-400">{request.method}</span> {request.title}
         </li>
     )

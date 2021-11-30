@@ -1,18 +1,13 @@
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { useParams } from 'react-router'
-import { ICollection } from '../../context/collection/types'
-import useCollection from '../../context/collection/useCollection'
 
 const Request = () => {
-    const [collection, setCollection] = useState<ICollection>({} as ICollection)
     const { _id } = useParams()
-    const { loading, find } = useCollection()
 
     useEffect(() => {
         (async () => {
             if (_id) {
-                const coll = await find(_id)
-                setCollection(coll)
+                console.log(_id);
             }
         })()
     }, [_id])
@@ -29,15 +24,6 @@ const Request = () => {
                 </div>
             </div>
             <div>
-                {
-                    !loading ? (
-                        <div>
-                            <ul>
-                                <li>{collection.title}</li>
-                            </ul>
-                        </div>
-                    ) : <>Loading...</>
-                }
 
             </div>
         </div>
