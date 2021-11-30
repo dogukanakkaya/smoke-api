@@ -1,5 +1,5 @@
 import { GraphQLObjectType, GraphQLList, GraphQLID, GraphQLString, GraphQLInputObjectType, GraphQLNonNull } from 'graphql'
-import { RequestType } from './request'
+import { RequestType } from '../request/type'
 
 export const CollectionType = new GraphQLObjectType({
     name: 'Collection',
@@ -7,6 +7,7 @@ export const CollectionType = new GraphQLObjectType({
         _id: { type: GraphQLID },
         title: { type: new GraphQLNonNull(GraphQLString) },
         requests: { type: new GraphQLList(RequestType) }
+        // Reason to use mongoose's relations is performance 
         /*
         requests: {
             type: new GraphQLList(RequestType),
