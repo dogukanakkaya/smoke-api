@@ -1,4 +1,4 @@
-import { ApolloQueryResult } from '@apollo/client';
+import { ApolloQueryResult, FetchResult } from '@apollo/client';
 import axios from 'axios'
 import { AxiosResponse } from "axios";
 import { API_URL } from './config'
@@ -20,6 +20,10 @@ export interface RestResponse<T, D = any> extends AxiosResponse<{ status: number
 
 }
 
-export interface GraphQLResponse<T> extends ApolloQueryResult<{ status: number } & T> {
+export interface GraphQLQueryResult<T> extends ApolloQueryResult<{ status: number } & T> {
+
+}
+
+export interface GraphQLMutationResult<T> extends FetchResult<{ status: number } & T> {
 
 }
