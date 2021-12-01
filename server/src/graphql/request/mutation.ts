@@ -1,13 +1,13 @@
 import { GraphQLID } from 'graphql'
 import { HydratedDocument } from 'mongoose'
 import { IRequest, Request } from '../../models/Request'
-import { RequestInputType, RequestType } from './type'
+import { CreateRequestInputType, UpdateRequestInputType, RequestType } from './type'
 
 export default ({
     createRequest: {
         type: RequestType,
         args: {
-            input: { type: RequestInputType }
+            input: { type: CreateRequestInputType }
         },
         resolve(_: any, { input }: { input: IRequest }) {
             const { title, url, method, queryParams, headers }: IRequest = input
@@ -27,7 +27,7 @@ export default ({
         type: RequestType,
         args: {
             _id: { type: GraphQLID },
-            input: { type: RequestInputType }
+            input: { type: UpdateRequestInputType }
         },
         resolve(_: any, { _id, input }: { _id: string, input: IRequest }) {
             const { title, url, method, queryParams, headers }: IRequest = input
