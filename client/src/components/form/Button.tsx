@@ -1,8 +1,8 @@
-import { IFormItem } from "./Form"
+import { IFormItem } from './Form'
 
 const Button = ({ type = 'button', className = '', children, ...otherProps }: IButton) => {
     return (
-        <button type={type} className={`s-btn ${className}`} {...otherProps}>{children}</button>
+        <button type={type} className={`s-btn`.concat(' ', className)} {...otherProps}>{children}</button>
     )
 }
 

@@ -13,7 +13,8 @@ body {
 }
 
 .s-label {
-    @apply absolute duration-300 top-3 -z-1 origin-0 text-gray-500
+    transform-origin: 0%;
+    @apply absolute duration-300 top-3 -z-1 text-gray-500
 }
 
 .s-input {
@@ -26,10 +27,6 @@ body {
 
 .s-sidebar-item {
     @apply flex flex-col items-center cursor-pointer p-4 border-b font-bold shadow-sm bg-white hover:bg-gray-100
-}
-
-.origin-0 {
-    transform-origin: 0%;
 }
 
 .s-input:focus ~ .s-label,

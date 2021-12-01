@@ -3,6 +3,7 @@ import Label from './Label'
 import Group from './Group'
 import { ReactNode } from 'react'
 import Button from './Button'
+import Select from './Select'
 
 const Form = ({ children, ...otherProps }: IForm) => {
     return (
@@ -19,6 +20,7 @@ interface IForm extends IFormItem { }
 
 Form.Group = Group
 Form.Input = Input
+Form.Select = Select
 Form.Label = Label
 Form.Button = Button
 

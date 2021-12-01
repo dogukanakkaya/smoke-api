@@ -2,7 +2,7 @@ import { createContext, ReactNode, useEffect, useMemo, useContext, Dispatch } fr
 import { useReducerWithMiddleware } from '../../hooks/useReducerWithMiddleware'
 import { GraphQLMutationResult, GraphQLQueryResult } from '../../utils/request'
 import { reducer } from './reducer'
-import { ActionType, LoadingType, ICollection, IModifiableCollection } from './types'
+import { ActionType, ICollection, IModifiableCollection } from './type'
 import { useApolloClient } from '@apollo/client'
 import { COLLECTION_QUERY, COLLECTIONS_QUERY } from '../../graphql/collection/query'
 import { CREATE_COLLECTION_MUTATION, UPDATE_COLLECTION_MUTATION, DELETE_COLLECTION_MUTATION } from '../../graphql/collection/mutation'
@@ -10,7 +10,6 @@ import { CREATE_COLLECTION_MUTATION, UPDATE_COLLECTION_MUTATION, DELETE_COLLECTI
 export interface ICollectionContext {
     collections: ICollection[]
     loading: boolean
-    showModal: boolean
     find: (_id: string) => Promise<ICollection>
     create: (collection: IModifiableCollection) => void
     update: (_id: string, collection: IModifiableCollection) => void
@@ -28,7 +27,7 @@ export const CollectionProvider = ({ children }: { children: ReactNode }) => {
 
     useEffect(() => {
         (async () => {
-            dispatch({ type: LoadingType.START_LOADING })
+            dispatch({ type: ActionType.START_LOADING })
 
             const response: GraphQLQueryResult<{ collections: ICollection[] }> = await client.query({
                 query: COLLECTIONS_QUERY
@@ -39,7 +38,7 @@ export const CollectionProvider = ({ children }: { children: ReactNode }) => {
     }, [])
 
     const find = async (_id: string): Promise<ICollection> => {
-        dispatch({ type: LoadingType.START_LOADING })
+        dispatch({ type: ActionType.START_LOADING })
 
         const response: GraphQLQueryResult<{ collection: ICollection }> = await client.query({
             query: COLLECTION_QUERY,
@@ -52,7 +51,7 @@ export const CollectionProvider = ({ children }: { children: ReactNode }) => {
     }
 
     const create = async (collection: IModifiableCollection) => {
-        dispatch({ type: LoadingType.START_LOADING })
+        dispatch({ type: ActionType.START_LOADING })
 
         const response: GraphQLMutationResult<{ createCollection: ICollection }> = await client.mutate({
             mutation: CREATE_COLLECTION_MUTATION,
@@ -63,8 +62,6 @@ export const CollectionProvider = ({ children }: { children: ReactNode }) => {
     }
 
     const update = async (_id: string, collection: IModifiableCollection) => {
-        //dispatch({ type: LoadingType.START_LOADING })
-
         const response: GraphQLMutationResult<{ updateCollection: ICollection }> = await client.mutate({
             mutation: UPDATE_COLLECTION_MUTATION,
             variables: { _id, input: collection }
@@ -74,8 +71,6 @@ export const CollectionProvider = ({ children }: { children: ReactNode }) => {
     }
 
     const destroy = async (_id: string) => {
-        //dispatch({ type: LoadingType.START_LOADING })
-
         const response: GraphQLMutationResult<{ deleteCollection: ICollection }> = await client.mutate({
             mutation: DELETE_COLLECTION_MUTATION,
             variables: { _id }

@@ -1,7 +1,7 @@
-import { IFormItem } from "./Form"
+import { IFormItem } from './Form'
 
 const Input = ({ className = '', placeholder = ' ', type = 'text', ...otherProps }: IInput) => {
-    return <input className={`s-input ${className}`} type={type} placeholder={placeholder} {...otherProps} />
+    return <input className={`s-input`.concat(' ', className)} type={type} placeholder={placeholder} {...otherProps} />
 }
 
 interface IInput extends IFormItem {

@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router'
-import { IRequest } from '../../context/collection/types'
+import { IRequest } from '../../context/collection/type'
 
 const Requests = ({ requests }: { requests: IRequest[] }) => {
     return (

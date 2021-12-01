@@ -1,4 +1,4 @@
-import { ICollection } from '../../context/collection/types'
+import { ICollection } from '../../context/collection/type'
 import useCollection from '../../context/collection/useCollection'
 import Form from '../form/Form'
 import Collection from './Collection'

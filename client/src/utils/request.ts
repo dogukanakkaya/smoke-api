@@ -27,3 +27,7 @@ export interface GraphQLQueryResult<T> extends ApolloQueryResult<{ status: numbe
 export interface GraphQLMutationResult<T> extends FetchResult<{ status: number } & T> {
 
 }
+
+export enum LoadingType {
+    START_LOADING = 'START_LOADING'
+}

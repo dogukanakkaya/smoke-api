@@ -1,3 +1,14 @@
+export enum HTTPMethod {
+    DELETE = 'DELETE',
+    GET = 'GET',
+    HEAD = 'HEAD',
+    OPTIONS = 'OPTIONS',
+    PATCH = 'PATCH',
+    POST = 'POST',
+    PUT = 'PUT',
+    TRACE = 'TRACE'
+}
+
 export interface ICollection {
     _id: string
     title: string
@@ -19,11 +30,8 @@ export interface IModifiableCollection {
     title: string
 }
 
-export enum LoadingType {
-    START_LOADING = 'START_LOADING'
-}
-
 export enum ActionType {
+    START_LOADING = 'START_LOADING',
     FETCH_COLLECTIONS = 'FETCH_COLLECTIONS',
     FETCH_COLLECTION = 'FETCH_COLLECTION',
     CREATE_COLLECTION = 'CREATE_COLLECTION',
@@ -31,4 +39,4 @@ export enum ActionType {
     DELETE_COLLECTION = 'DELETE_COLLECTION'
 }
 
-export type Action = { type: ActionType | LoadingType, payload?: ICollection[] | ICollection }
+export type Action = { type: ActionType, payload?: ICollection[] | ICollection }

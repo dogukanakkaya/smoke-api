@@ -1,9 +1,9 @@
-import { Action, ActionType, ICollection, LoadingType } from './types'
+import { Action, ActionType, ICollection } from './type'
 import { ICollectionContext } from './useCollection'
 
 export const reducer = (state: ICollectionContext, { type, payload }: Action) => {
     switch (type) {
-        case LoadingType.START_LOADING:
+        case ActionType.START_LOADING:
             return {
                 ...state,
                 loading: true
@@ -35,7 +35,7 @@ export const reducer = (state: ICollectionContext, { type, payload }: Action) =>
 
             return {
                 ...state,
-                collections: collections,
+                collections,
                 loading: false
             }
         case ActionType.DELETE_COLLECTION:

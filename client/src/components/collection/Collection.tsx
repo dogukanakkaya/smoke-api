@@ -1,5 +1,5 @@
 import { ChangeEvent, useState } from 'react'
-import { ICollection } from '../../context/collection/types'
+import { ICollection } from '../../context/collection/type'
 import useCollection from '../../context/collection/useCollection'
 import Requests from './Requests'
 
